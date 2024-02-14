@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
         - name: app-db
-          image: isjustintime/cd12355-db:0.0.1
+          image: 918744264023.dkr.ecr.us-east-1.amazonaws.com/coworking-db:latest
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432

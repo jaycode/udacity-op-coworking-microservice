@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: coworking
-        image: DOCKER_REPOSITORY_ORG/DOCKER_IMAGE_NAME:VERSION_TAG
+        image: 918744264023.dkr.ecr.us-east-1.amazonaws.com/coworking:latest
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
