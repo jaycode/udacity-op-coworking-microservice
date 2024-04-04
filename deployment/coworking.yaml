@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: coworking
 spec:
+  type: LoadBalancer
   selector:
-    app.kubernetes.io/name: coworking
+    service: coworking
   ports:
   - name: "5153"
     protocol: TCP
@@ -29,8 +30,8 @@ spec:
     spec:
       containers:
       - name: coworking
-        image: 918744264023.dkr.ecr.us-east-1.amazonaws.com/coworking:latest
-        imagePullPolicy: Always
+        image: <DOCKER_IMAGE_URI_FROM_ECR>
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             path: /health_check
@@ -43,7 +44,13 @@ spec:
             port: 5153
           initialDelaySeconds: 5
           timeoutSeconds: 5
+        envFrom:
+        - configMapRef:
+            name: coworking-config
         env:
-        - name: VAR_KEY
-          value: VAR_VAL
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: <NAME OF THE Secret>
+              key: <THE KEY FROM Secret WHICH has THE ENCODED PASSWORD>
       restartPolicy: Always
