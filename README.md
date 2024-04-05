@@ -23,7 +23,7 @@ For this project, you are a DevOps engineer who will be collaborating with a tea
 #### 1. Configure a Database
 Set up a Postgres database through YAML configurations. The YAML files are `pvc.yaml`, `pv.yaml`, and `postgresql-deployment.yaml`. Apply each one of them subsequently.
 
-3. Test Database Connection
+##### Test Database Connection
 The database is accessible within the cluster. This means that when you will have some issues connecting to it via your local environment. You can either connect to a pod that has access to the cluster _or_ connect remotely via [`Port Forwarding`](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
 
 * Connecting Via Port Forwarding
@@ -38,7 +38,7 @@ kubectl exec -it <POD_NAME> bash
 PGPASSWORD="<PASSWORD HERE>" psql postgres://postgres@<SERVICE_NAME>:5432/postgres -c <COMMAND_HERE>
 ```
 
-4. Run Seed Files
+##### Run Seed Files
 Run the seed files in `db/` in order to create the tables and populate them with data.
 
 ```bash
@@ -56,7 +56,7 @@ chmod +x ./prepare_db.sh
 ./prepare_db.sh
 ```
 
-### 2. Run the Analytics Application Locally
+### Run the Analytics Application Locally
 In the `analytics/` directory:
 
 1. Install dependencies
@@ -78,6 +78,9 @@ python app.py
 * Generate report for check-ins grouped by users
 `curl <BASE_URL>/api/reports/user_visits`
 
+### Deployment yaml files
+The yaml files are available in the `./deployment` directory.
+
 ## Project Instructions
 1. Set up a Postgres database
 2. Create a `Dockerfile` for the Python application. I use `python:3.8-slim-bookworm` as the base image, following the workspace's Python version.
@@ -86,8 +89,9 @@ python app.py
 5. Check AWS CloudWatch for application logs
 
 ### Deliverables
-1. `Dockerfile` - in `./analytics` directory
-2. Screenshots - in `./screenshots` directory:
+1. Deployment file - in `./deployment` directory
+2. `Dockerfile` - in `./analytics` directory
+3. Screenshots - in `./screenshots` directory:
     1. Screenshot of AWS CodeBuild pipeline
     2. Screenshot of AWS ECR repository for the application's repository
     3. Screenshot of `kubectl get svc`
@@ -96,4 +100,4 @@ python app.py
     6. Screenshot of `kubectl describe deployment <SERVICE_NAME>`
     7. All Kubernetes config files used for deployment (ie YAML files)
     8. Screenshot of AWS CloudWatch logs for the application
-10. `README.md` file,
+4. `README.md` file,
